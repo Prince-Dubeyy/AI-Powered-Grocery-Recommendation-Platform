@@ -16,14 +16,12 @@ logger = logging.getLogger(__name__)
 
 app = FastAPI(title="Instacart API", description="API for Grocery Recommendations and Analytics")
 
-# Determine allowed origins from environment variable or fallback to localhost
-allowed_origins_str = os.getenv("ALLOWED_ORIGINS", "http://localhost:5173,http://127.0.0.1:5173,https://ai-powered-grocery-recommendation-p-snowyy.vercel.app")
-origins = [origin.strip() for origin in allowed_origins_str.split(",") if origin.strip()]
-
-# Add CORS middleware to allow React frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=[
+        "https://ai-powered-grocery-recommendation-p-snowyy.vercel.app",
+        "https://ai-powered-grocery-recommendation-platform-u7qs-oop4koqpg.vercel.app"
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
