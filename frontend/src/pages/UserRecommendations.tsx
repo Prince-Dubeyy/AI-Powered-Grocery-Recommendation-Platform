@@ -3,12 +3,12 @@ import api from '../api';
 import { User } from 'lucide-react';
 
 const UserRecommendations = () => {
-  const [userId, setUserId] = useState('89960');
+  const [userId, setUserId] = useState('1');
   const [recommendations, setRecommendations] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const sampleUsers = [89960, 157793, 118560, 182324, 87386];
+  const sampleUsers = [1, 25, 100, 250, 500];
 
   const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
