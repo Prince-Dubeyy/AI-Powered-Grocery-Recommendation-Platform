@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import api from '../api';
-import { User, Search } from 'lucide-react';
+import { User } from 'lucide-react';
 
 const UserRecommendations = () => {
   const [userId, setUserId] = useState('1');

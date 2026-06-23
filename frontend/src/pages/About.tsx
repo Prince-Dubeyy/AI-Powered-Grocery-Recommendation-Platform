@@ -1,4 +1,3 @@
-import React from 'react';
 import { Info, Database, Server, Code2, Sparkles } from 'lucide-react';
 
 const About = () => {
