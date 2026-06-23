@@ -7,7 +7,10 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 # Data directories
 DATA_DIR = PROJECT_ROOT / "data"
 RAW_DATA_DIR = PROJECT_ROOT / "archive" # the original unzipped archive
-PROCESSED_DATA_DIR = DATA_DIR / "processed"
+if (DATA_DIR / "processed" / "orders.parquet").exists():
+    PROCESSED_DATA_DIR = DATA_DIR / "processed"
+else:
+    PROCESSED_DATA_DIR = PROJECT_ROOT / "data_sample"
 
 # Ensure directories exist
 PROCESSED_DATA_DIR.mkdir(parents=True, exist_ok=True)
