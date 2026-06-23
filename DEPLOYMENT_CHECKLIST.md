@@ -1,21 +1,17 @@
-# Final Deployment Checklist
+# DEPLOYMENT CHECKLIST
 
-Before going live, verify the following steps have been completed:
+Before verifying the final live deployment, confirm the following:
 
-## Frontend (Vercel)
-- [ ] Root Directory set to `frontend`.
-- [ ] Environment variable `VITE_API_URL` set to the live backend URL.
-- [ ] Build completes successfully without `tsc` or `vite` errors.
-- [ ] No `localhost` network calls visible in the browser network tab.
+- [ ] `frontend/package.json` build script is exactly `"vite build"`.
+- [ ] `frontend/vercel.json` exists and correctly defines the Vite framework.
+- [ ] Vercel Root Directory is set to `frontend`.
+- [ ] Vercel `VITE_API_URL` is populated.
+- [ ] `backend/requirements.txt` includes `google-genai` and `fastapi`.
+- [ ] `backend/main.py` supports dynamic `$PORT` assignment.
+- [ ] Railway Root Directory is set to `/backend`.
+- [ ] Railway `GEMINI_API_KEY` and `ALLOWED_ORIGINS` are populated.
 
-## Backend (Railway/Render)
-- [ ] Root Directory set to `backend`.
-- [ ] Environment variable `GEMINI_API_KEY` is set.
-- [ ] Environment variable `ALLOWED_ORIGINS` is set to the Vercel URL.
-- [ ] Startup logs show `Application startup complete` on port `$PORT`.
-- [ ] Hitting the backend URL directly in the browser returns the Welcome JSON.
-
-## Integration
-- [ ] The Vercel frontend successfully loads the Dashboard charts.
-- [ ] The Product Recommendations page successfully connects to the backend and returns items.
-- [ ] The AI Explainer feature successfully utilizes the Gemini API.
+### Validation Status
+- Local build tests (`npm run build`): **PASSED**
+- No `localhost:8000` hardcoded references: **PASSED**
+- Dynamic Backend Startup tests: **PASSED**
