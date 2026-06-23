@@ -9,7 +9,9 @@ const defaultApiUrl = isProduction
   ? 'https://ai-powered-grocery-recommendation.onrender.com' 
   : 'http://localhost:8000';
 
-const apiURL = import.meta.env.VITE_API_URL || defaultApiUrl;
+let apiURL = import.meta.env.VITE_API_URL || defaultApiUrl;
+// Fix incorrect /docs suffix if the environment variable was copied from the Swagger UI URL
+apiURL = apiURL.replace(/\/docs\/?$/, '');
 
 const api = axios.create({
   baseURL: apiURL,
