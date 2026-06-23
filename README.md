@@ -1,49 +1,308 @@
-# CartMind AI: Smart Grocery Recommendation Platform 🛒🧠
+# 🛒 AI-Powered Grocery Recommendation Platform
 
-![React](https://img.shields.io/badge/React-19-blue?style=for-the-badge&logo=react)
-![FastAPI](https://img.shields.io/badge/FastAPI-0.111-009688?style=for-the-badge&logo=fastapi)
-![Python](https://img.shields.io/badge/Python-3.12-3776AB?style=for-the-badge&logo=python)
-![Gemini](https://img.shields.io/badge/Google_Gemini-2.0-orange?style=for-the-badge&logo=google)
+An end-to-end AI-powered grocery recommendation system built using **FastAPI**, **React**, **TypeScript**, **Machine Learning**, **Association Rule Mining**, **Collaborative Filtering**, and **Google Gemini AI**.
 
-CartMind AI is an intelligent, full-stack grocery recommendation and market basket analysis platform. Powered by **FastAPI**, **React**, and **Google's Gemini 2.0 AI**, this platform leverages real Instacart dataset patterns to generate highly relevant product associations, collaborative filtering recommendations, and dynamically generated AI shopping baskets.
+The platform analyzes real grocery purchase patterns from the Instacart dataset and generates intelligent product recommendations, personalized suggestions, product similarity insights, and AI-generated explanations.
 
-## 🌟 Key Features
+## 🚀 Live Demo
 
-* **Market Basket Analysis**: Advanced association rules mining (Apriori) to discover frequent itemsets and generate "Frequently Bought Together" recommendations.
-* **Collaborative Filtering** (In Progress): User-item matrix factorization to provide personalized recommendations based on historical purchase data.
-* **Item-Based Similarity**: Smart product matching based on departmental and aisle-level categorization.
-* **Generative AI Assistant**: Integrated with Google Gemini 2.0 to dynamically explain recommendations and generate specialized grocery baskets (e.g., Healthy, Budget, High Protein).
-* **Interactive Dashboard**: Modern, responsive React dashboard visualizing real-time analytical KPIs (Reorder rates, Basket sizes).
+### Frontend
 
-## 🚀 Architecture
+https://ai-powered-grocery-recommendation-p-snowy.vercel.app/
 
-The application is split into two primary layers:
-1. **Frontend**: A React 19 application built with Vite and Tailwind CSS.
-2. **Backend**: A high-performance FastAPI server utilizing Pandas, NumPy, and Scikit-Learn for data processing, and `google-genai` for LLM interactions.
+### Backend API
 
-## 🛠️ Tech Stack
+https://ai-powered-grocery-recommendation.onrender.com
 
-* **Frontend:** React, TypeScript, Tailwind CSS, Vite, Lucide Icons, Axios.
-* **Backend:** FastAPI, Python, Pandas, Uvicorn, Google GenAI SDK.
-* **Data Processing:** Jupyter Notebooks, Parquet storage format for memory-efficient loading.
+### API Documentation
 
-Start the server:
-```bash
-python main.py
-```
-
-### 2. Frontend Setup
-Open a new terminal and navigate to the frontend:
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-Visit `http://localhost:5173` to view the application!
-
-## 📊 Data Source
-This project utilizes the publicly available **Instacart Market Basket Analysis** dataset, encompassing millions of grocery orders to derive realistic and practical recommendation models.
+https://ai-powered-grocery-recommendation.onrender.com/docs
 
 ---
-*Developed by [Prince Dubey](https://github.com/Prince-Dubeyy).*
+
+# 📌 Features
+
+### 📊 Analytics Dashboard
+
+* Dataset statistics
+* User analytics
+* Product analytics
+* Order analytics
+* Real-time visualizations
+
+### 🛍 Product Recommendations
+
+Uses Association Rule Mining (Apriori Algorithm) to recommend products frequently purchased together.
+
+Example:
+
+Bread → Butter, Jam
+
+Milk → Cereal
+
+### 👤 Personalized Recommendations
+
+Uses Collaborative Filtering to generate user-specific recommendations based on historical purchasing behavior.
+
+### 🔍 Similar Product Discovery
+
+Finds products with similar purchase patterns using recommendation models.
+
+### 🤖 AI Recommendation Explainer
+
+Powered by Google Gemini AI.
+
+Explains:
+
+* Why a product was recommended
+* Purchase pattern insights
+* Shopping behavior interpretation
+
+### 💬 AI Shopping Assistant
+
+Conversational AI assistant capable of:
+
+* Grocery planning
+* Product suggestions
+* Shopping guidance
+* Recommendation explanations
+
+---
+
+# 🧠 Machine Learning Components
+
+## Association Rule Mining
+
+Implemented using:
+
+* Apriori Algorithm
+* Frequent Itemsets
+* Confidence
+* Lift
+* Support
+
+Used for:
+
+* Product Recommendations
+* Cross-Selling Insights
+
+---
+
+## Collaborative Filtering
+
+Used for:
+
+* Personalized User Recommendations
+
+Techniques:
+
+* User-Item Matrix
+* Similarity Computation
+* Recommendation Ranking
+
+---
+
+# 📂 Dataset
+
+This project uses the Instacart Market Basket Analysis Dataset.
+
+Dataset contains:
+
+* 200,000+ Users
+* 50,000+ Products
+* Millions of Purchase Records
+
+Files utilized:
+
+* orders.csv
+* products.csv
+* aisles.csv
+* departments.csv
+* order_products__prior.csv
+* order_products__train.csv
+
+---
+
+# 🏗 Architecture
+
+Frontend (React + TypeScript)
+⬇
+REST API Calls
+⬇
+FastAPI Backend
+⬇
+ML Recommendation Engine
+⬇
+Instacart Dataset + Trained Models
+⬇
+Gemini AI Integration
+
+---
+
+# 🛠 Tech Stack
+
+## Frontend
+
+* React
+* TypeScript
+* Vite
+* Tailwind CSS
+* Axios
+* Recharts
+
+## Backend
+
+* FastAPI
+* Python
+* Pandas
+* NumPy
+* Scikit-Learn
+
+## AI
+
+* Google Gemini API
+
+## Machine Learning
+
+* Apriori
+* Association Rules
+* Collaborative Filtering
+
+## Deployment
+
+### Frontend
+
+* Vercel
+
+### Backend
+
+* Render
+
+---
+
+# 📸 Application Modules
+
+### Dashboard
+
+Displays key grocery analytics and dataset insights.
+
+### Product Recommendations
+
+Recommends products frequently purchased together.
+
+### User Recommendations
+
+Personalized recommendations using collaborative filtering.
+
+### Similar Products
+
+Discovers related grocery items.
+
+### AI Explainer
+
+Explains recommendation logic using Gemini.
+
+### AI Assistant
+
+Interactive grocery assistant powered by Generative AI.
+
+---
+
+# 🔌 API Endpoints
+
+## Analytics
+
+GET /analytics
+
+Returns platform analytics and dataset statistics.
+
+---
+
+## Product Recommendation
+
+POST /recommend/product
+
+Generate recommendations for a product.
+
+---
+
+## User Recommendation
+
+POST /recommend/user
+
+Generate personalized recommendations.
+
+---
+
+## Similar Products
+
+POST /recommend/similar
+
+Find similar grocery products.
+
+---
+
+## AI Explain
+
+POST /ai/explain
+
+Generate recommendation explanations.
+
+---
+
+## AI Assistant
+
+POST /ai/assistant
+
+Interact with the grocery AI assistant.
+
+---
+
+# 📈 Real-World Applications
+
+* E-Commerce Recommendations
+* Grocery Retail Analytics
+* Customer Personalization
+* Cross-Selling Systems
+* Recommendation Engines
+* AI-Powered Shopping Assistants
+
+---
+
+# 🔮 Future Improvements
+
+* Hybrid Recommendation Systems
+* Deep Learning Recommendations
+* Vector Search
+* Real-Time Recommendation Pipeline
+* User Authentication
+* Shopping Cart Integration
+* Recommendation Feedback Loop
+* MLOps Monitoring
+
+---
+
+# 👨‍💻 Author
+
+Prince Dubey
+
+BSc Data Science & Cyber Security
+
+GitHub:
+https://github.com/Prince-Dubeyy
+
+Email:
+[princeekjmar@gmail.com](mailto:princeekjmar@gmail.com)
+
+---
+
+# ⭐ Support
+
+If you found this project useful:
+
+⭐ Star the repository
+
+🍴 Fork the project
+
+📢 Share feedback and suggestions
+
