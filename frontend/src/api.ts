@@ -1,6 +1,15 @@
 import axios from 'axios';
 
-const apiURL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+console.log("MODE:", import.meta.env.MODE);
+console.log("VITE_API_URL:", import.meta.env.VITE_API_URL);
+
+// Prevent fallback to localhost in production environments
+const isProduction = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1';
+const defaultApiUrl = isProduction 
+  ? 'https://ai-powered-grocery-recommendation.onrender.com' 
+  : 'http://localhost:8000';
+
+const apiURL = import.meta.env.VITE_API_URL || defaultApiUrl;
 
 const api = axios.create({
   baseURL: apiURL,
@@ -12,10 +21,7 @@ const api = axios.create({
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    // If we get a Network Error and we are falling back to localhost in production
-    if (error.message === 'Network Error' && apiURL.includes('localhost') && window.location.hostname !== 'localhost') {
-      error.message = 'Backend Connection Failed: The frontend is attempting to connect to a local backend (localhost). Please configure the VITE_API_URL environment variable in your Vercel Dashboard to point to your live backend URL (e.g., Railway) and trigger a redeploy.';
-    }
+    // We removed the localhost warning override so true CORS/Network errors are visible
     return Promise.reject(error);
   }
 );
