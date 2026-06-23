@@ -19,8 +19,7 @@ app = FastAPI(title="Instacart API", description="API for Grocery Recommendation
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "https://ai-powered-grocery-recommendation-p-snowyy.vercel.app",
-        "https://ai-powered-grocery-recommendation-platform-u7qs-oop4koqpg.vercel.app"
+        "https://ai-powered-grocery-recommendation-p-snowy.vercel.app"
     ],
     allow_credentials=True,
     allow_methods=["*"],
