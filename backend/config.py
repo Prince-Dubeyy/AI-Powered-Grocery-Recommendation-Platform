@@ -7,7 +7,7 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 # Data directories
 DATA_DIR = PROJECT_ROOT / "data"
 RAW_DATA_DIR = PROJECT_ROOT / "archive" # the original unzipped archive
-PROCESSED_DATA_DIR = DATA_DIR / "artifacts"
+PROCESSED_DATA_DIR = PROJECT_ROOT / "model_artifacts"
 
 # Ensure directories exist
 PROCESSED_DATA_DIR.mkdir(parents=True, exist_ok=True)

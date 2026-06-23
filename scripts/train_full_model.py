@@ -6,7 +6,7 @@ import gc
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 ARCHIVE_DIR = PROJECT_ROOT / "archive"
-ARTIFACTS_DIR = PROJECT_ROOT / "data" / "artifacts"
+ARTIFACTS_DIR = PROJECT_ROOT / "model_artifacts"
 
 ARTIFACTS_DIR.mkdir(parents=True, exist_ok=True)
 
