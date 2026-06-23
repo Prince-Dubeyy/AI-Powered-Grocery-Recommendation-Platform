@@ -55,11 +55,11 @@ const Dashboard = () => {
   }
 
   const statCards = [
-    { title: 'Total Orders', value: data?.total_orders.toLocaleString(), icon: <ShoppingBag />, color: 'bg-blue-500' },
-    { title: 'Total Customers', value: data?.total_customers.toLocaleString(), icon: <Users />, color: 'bg-green-500' },
-    { title: 'Total Products', value: data?.total_products.toLocaleString(), icon: <Package />, color: 'bg-purple-500' },
-    { title: 'Reorder Rate', value: `${(data!.reorder_rate * 100).toFixed(1)}%`, icon: <RefreshCw />, color: 'bg-yellow-500' },
-    { title: 'Avg Basket Size', value: data?.avg_basket_size.toFixed(1), icon: <BarChart3 />, color: 'bg-pink-500' },
+    { title: 'Total Orders', value: (data?.total_orders ?? 0).toLocaleString(), icon: <ShoppingBag />, color: 'bg-blue-500' },
+    { title: 'Total Customers', value: (data?.total_customers ?? 0).toLocaleString(), icon: <Users />, color: 'bg-green-500' },
+    { title: 'Total Products', value: (data?.total_products ?? 0).toLocaleString(), icon: <Package />, color: 'bg-purple-500' },
+    { title: 'Reorder Rate', value: `${((data?.reorder_rate ?? 0) * 100).toFixed(1)}%`, icon: <RefreshCw />, color: 'bg-yellow-500' },
+    { title: 'Avg Basket Size', value: (data?.avg_basket_size ?? 0).toFixed(1), icon: <BarChart3 />, color: 'bg-pink-500' },
   ];
 
   return (
@@ -68,7 +68,7 @@ const Dashboard = () => {
       <p className="text-gray-600">High-level KPIs derived from millions of Instacart orders.</p>
 
       {/* Proof of Dataset Scale Section */}
-      {datasetInfo && (
+      {datasetInfo && !('error' in datasetInfo) && (
         <div className="bg-gradient-to-r from-blue-900 to-indigo-900 text-white p-6 rounded-xl shadow-lg border border-indigo-800 flex flex-col md:flex-row gap-6 items-center justify-between">
           <div className="flex items-center gap-4">
             <div className="bg-indigo-800 p-4 rounded-full">
@@ -84,11 +84,11 @@ const Dashboard = () => {
           <div className="flex gap-8 text-center bg-indigo-950 p-4 rounded-lg border border-indigo-800">
             <div>
               <p className="text-xs text-blue-300 font-medium uppercase tracking-wider">Model Interactions</p>
-              <p className="text-2xl font-bold text-green-400 mt-1">{datasetInfo.interactions.toLocaleString()}</p>
+              <p className="text-2xl font-bold text-green-400 mt-1">{(datasetInfo?.interactions ?? 0).toLocaleString()}</p>
             </div>
             <div>
               <p className="text-xs text-blue-300 font-medium uppercase tracking-wider">Model Users</p>
-              <p className="text-2xl font-bold text-white mt-1">{datasetInfo.users.toLocaleString()}</p>
+              <p className="text-2xl font-bold text-white mt-1">{(datasetInfo?.users ?? 0).toLocaleString()}</p>
             </div>
           </div>
         </div>
