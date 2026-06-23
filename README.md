@@ -27,21 +27,6 @@ The application is split into two primary layers:
 * **Backend:** FastAPI, Python, Pandas, Uvicorn, Google GenAI SDK.
 * **Data Processing:** Jupyter Notebooks, Parquet storage format for memory-efficient loading.
 
-## ⚙️ Quick Start
-
-### 1. Backend Setup
-```bash
-cd backend
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-pip install -r requirements.txt
-```
-
-Create a `.env` file in the `backend/` directory:
-```env
-GEMINI_API_KEY="your_google_ai_studio_key"
-```
-
 Start the server:
 ```bash
 python main.py
