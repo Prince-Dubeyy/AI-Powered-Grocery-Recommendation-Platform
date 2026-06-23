@@ -3,10 +3,12 @@ import api from '../api';
 import { User } from 'lucide-react';
 
 const UserRecommendations = () => {
-  const [userId, setUserId] = useState('1');
+  const [userId, setUserId] = useState('89960');
   const [recommendations, setRecommendations] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  const sampleUsers = [89960, 157793, 118560, 182324, 87386];
 
   const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -30,27 +32,44 @@ const UserRecommendations = () => {
       </div>
 
       <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-        <form onSubmit={handleSearch} className="flex gap-4">
-          <div className="relative flex-1">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <User className="h-5 w-5 text-gray-400" />
+        <form onSubmit={handleSearch} className="flex flex-col gap-4">
+          <div className="flex gap-4">
+            <div className="relative flex-1">
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <User className="h-5 w-5 text-gray-400" />
+              </div>
+              <input
+                type="number"
+                min="1"
+                className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-gray-900"
+                placeholder="Enter User ID..."
+                value={userId}
+                onChange={(e) => setUserId(e.target.value)}
+              />
             </div>
-            <input
-              type="number"
-              min="1"
-              className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-gray-900"
-              placeholder="Enter User ID..."
-              value={userId}
-              onChange={(e) => setUserId(e.target.value)}
-            />
+            <button
+              type="submit"
+              disabled={loading}
+              className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition-colors flex items-center gap-2"
+            >
+              {loading ? <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div> : 'Get Personalized Picks'}
+            </button>
           </div>
-          <button
-            type="submit"
-            disabled={loading}
-            className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition-colors flex items-center gap-2"
-          >
-            {loading ? <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div> : 'Get Personalized Picks'}
-          </button>
+          <div className="flex items-center gap-3 text-sm text-gray-600">
+            <span>Try these sample users:</span>
+            <div className="flex gap-2">
+              {sampleUsers.map(id => (
+                <button
+                  key={id}
+                  type="button"
+                  onClick={() => setUserId(id.toString())}
+                  className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded-full transition-colors"
+                >
+                  {id}
+                </button>
+              ))}
+            </div>
+          </div>
         </form>
       </div>
 
