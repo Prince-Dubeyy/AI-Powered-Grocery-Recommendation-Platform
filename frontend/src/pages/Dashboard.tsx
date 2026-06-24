@@ -80,7 +80,6 @@ const Dashboard = () => {
                 The recommendation engine is successfully trained on the massive, completely un-sampled Instacart dataset. Memory overhead is bypassed via precomputed O(1) lookup matrices.
               </p>
             </div>
-            </div>
           </div>
           <div className="flex flex-col sm:flex-row gap-4 sm:gap-8 text-center bg-indigo-950 p-4 rounded-lg border border-indigo-800 w-full md:w-auto">
             <div className="flex-1">
