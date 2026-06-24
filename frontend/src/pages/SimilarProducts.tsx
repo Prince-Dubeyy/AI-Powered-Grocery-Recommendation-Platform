@@ -23,14 +23,14 @@ const SimilarProducts = () => {
   };
 
   return (
-    <div className="max-w-5xl mx-auto space-y-8">
+    <div className="max-w-5xl mx-auto space-y-6 sm:space-y-8">
       <div>
-        <h1 className="text-3xl font-bold text-gray-800">🔍 Find Similar Products</h1>
-        <p className="text-gray-600 mt-2">Item-Based Similarity mapping products by department and aisle.</p>
+        <h1 className="text-2xl sm:text-3xl font-bold text-gray-800">🔍 Find Similar Products</h1>
+        <p className="text-sm sm:text-base text-gray-600 mt-2">Item-Based Similarity mapping products by department and aisle.</p>
       </div>
 
-      <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-        <form onSubmit={handleSearch} className="flex gap-4">
+      <div className="bg-white p-4 sm:p-6 rounded-xl shadow-sm border border-gray-100">
+        <form onSubmit={handleSearch} className="flex flex-col sm:flex-row gap-4">
           <div className="relative flex-1">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
               <Search className="h-5 w-5 text-gray-400" />
@@ -46,7 +46,7 @@ const SimilarProducts = () => {
           <button
             type="submit"
             disabled={loading}
-            className="bg-orange-600 hover:bg-orange-700 text-white font-medium py-3 px-6 rounded-lg transition-colors flex items-center gap-2"
+            className="bg-orange-600 hover:bg-orange-700 text-white font-medium py-3 px-6 rounded-lg transition-colors flex items-center justify-center gap-2 w-full sm:w-auto min-h-[44px]"
           >
             {loading ? <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div> : 'Find Similar Products'}
           </button>
@@ -61,8 +61,8 @@ const SimilarProducts = () => {
 
       {recommendations.length > 0 && !error && (
         <div className="space-y-4">
-          <h2 className="text-xl font-semibold text-gray-800">Similar to "{productName}":</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          <h2 className="text-lg sm:text-xl font-semibold text-gray-800">Similar to "{productName}":</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-4">
             {recommendations.map((rec, idx) => (
               <div key={idx} className="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex flex-col items-center justify-center text-center gap-3 transition-transform hover:-translate-y-1 hover:shadow-md">
                 <div className="bg-orange-50 text-orange-600 p-3 rounded-full">

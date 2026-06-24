@@ -40,12 +40,12 @@ def recommend_products(product_name, top_n=5):
     """
     load_data()
     if _rules.empty:
-        return ["No rules generated yet."]
+        raise ValueError("No rules generated yet.")
         
     matching_rules = _rules[_rules['antecedents_names'].str.contains(product_name, case=False, na=False)]
     
     if matching_rules.empty:
-        return [f"No frequent associations found for '{product_name}'."]
+        raise ValueError(f"No frequent associations found for '{product_name}'.")
         
     matching_rules = matching_rules.sort_values(by=['lift', 'confidence'], ascending=[False, False])
     
@@ -67,7 +67,7 @@ def recommend_similar_products(product_name, top_n=5):
     
     prod_match = _products[_products['product_name'].str.contains(product_name, case=False, na=False)]
     if prod_match.empty:
-        return [f"Product '{product_name}' not found."]
+        raise ValueError(f"Product '{product_name}' not found.")
         
     prod = prod_match.iloc[0]
     aisle_id = prod['aisle_id']
@@ -85,7 +85,7 @@ def recommend_for_user(user_id, top_n=5):
     load_data()
     
     if _user_top_products.empty or user_id not in _user_top_products.index:
-        return [f"User '{user_id}' not found or has no history in the model."]
+        raise ValueError(f"User '{user_id}' not found or has no history in the model.")
         
     top_user_product_ids = _user_top_products.loc[user_id, 'top_products']
     if not isinstance(top_user_product_ids, list) and not isinstance(top_user_product_ids, np.ndarray):
@@ -96,15 +96,23 @@ def recommend_for_user(user_id, top_n=5):
     recommendations = set()
     
     for product in top_user_products:
-        recs = recommend_products(product, top_n=2)
-        if recs and not recs[0].startswith("No "):
+        try:
+            recs = recommend_products(product, top_n=2)
             for r in recs:
                 recommendations.add(r)
+        except ValueError:
+            pass
                 
     if not recommendations:
         for product in top_user_products:
-            recs = recommend_similar_products(product, top_n=2)
-            for r in recs:
-                recommendations.add(r)
+            try:
+                recs = recommend_similar_products(product, top_n=2)
+                for r in recs:
+                    recommendations.add(r)
+            except ValueError:
+                pass
                 
+    if not recommendations:
+        raise ValueError(f"Could not generate recommendations for user '{user_id}'.")
+        
     return list(recommendations)[:top_n]

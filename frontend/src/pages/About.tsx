@@ -2,16 +2,16 @@ import { Info, Database, Server, Code2, Sparkles } from 'lucide-react';
 
 const About = () => {
   return (
-    <div className="max-w-4xl mx-auto space-y-8">
+    <div className="max-w-4xl mx-auto space-y-6 sm:space-y-8">
       <div>
-        <h1 className="text-3xl font-bold text-gray-800 flex items-center gap-3">
+        <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 flex items-center gap-3">
           <Info className="text-indigo-600" size={32} />
           About This Project
         </h1>
-        <p className="text-gray-600 mt-2">AI-Powered Smart Grocery Recommendation Platform</p>
+        <p className="text-sm sm:text-base text-gray-600 mt-2">AI-Powered Smart Grocery Recommendation Platform</p>
       </div>
 
-      <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-100 space-y-8">
+      <div className="bg-white p-6 sm:p-8 rounded-xl shadow-sm border border-gray-100 space-y-6 sm:space-y-8">
         
         <section>
           <h2 className="text-xl font-bold text-gray-800 border-b pb-2 mb-4">Project Overview</h2>

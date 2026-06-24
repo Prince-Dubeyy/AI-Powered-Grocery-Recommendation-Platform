@@ -63,13 +63,13 @@ const Dashboard = () => {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto space-y-6">
-      <h1 className="text-3xl font-bold text-gray-800">Business Analytics Dashboard</h1>
-      <p className="text-gray-600">High-level KPIs derived from millions of Instacart orders.</p>
+    <div className="max-w-7xl mx-auto space-y-4 sm:space-y-6">
+      <h1 className="text-2xl sm:text-3xl font-bold text-gray-800">Business Analytics Dashboard</h1>
+      <p className="text-sm sm:text-base text-gray-600">High-level KPIs derived from millions of Instacart orders.</p>
 
       {/* Proof of Dataset Scale Section */}
       {datasetInfo && !('error' in datasetInfo) && (
-        <div className="bg-gradient-to-r from-blue-900 to-indigo-900 text-white p-6 rounded-xl shadow-lg border border-indigo-800 flex flex-col md:flex-row gap-6 items-center justify-between">
+        <div className="bg-gradient-to-r from-blue-900 to-indigo-900 text-white p-4 sm:p-6 rounded-xl shadow-lg border border-indigo-800 flex flex-col md:flex-row gap-4 sm:gap-6 items-center justify-between">
           <div className="flex items-center gap-4">
             <div className="bg-indigo-800 p-4 rounded-full">
               <Database size={32} className="text-blue-300" />
@@ -80,21 +80,22 @@ const Dashboard = () => {
                 The recommendation engine is successfully trained on the massive, completely un-sampled Instacart dataset. Memory overhead is bypassed via precomputed O(1) lookup matrices.
               </p>
             </div>
-          </div>
-          <div className="flex gap-8 text-center bg-indigo-950 p-4 rounded-lg border border-indigo-800">
-            <div>
-              <p className="text-xs text-blue-300 font-medium uppercase tracking-wider">Model Interactions</p>
-              <p className="text-2xl font-bold text-green-400 mt-1">{(datasetInfo?.interactions ?? 0).toLocaleString()}</p>
             </div>
-            <div>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-4 sm:gap-8 text-center bg-indigo-950 p-4 rounded-lg border border-indigo-800 w-full md:w-auto">
+            <div className="flex-1">
+              <p className="text-xs text-blue-300 font-medium uppercase tracking-wider">Model Interactions</p>
+              <p className="text-xl sm:text-2xl font-bold text-green-400 mt-1">{(datasetInfo?.interactions ?? 0).toLocaleString()}</p>
+            </div>
+            <div className="flex-1">
               <p className="text-xs text-blue-300 font-medium uppercase tracking-wider">Model Users</p>
-              <p className="text-2xl font-bold text-white mt-1">{(datasetInfo?.users ?? 0).toLocaleString()}</p>
+              <p className="text-xl sm:text-2xl font-bold text-white mt-1">{(datasetInfo?.users ?? 0).toLocaleString()}</p>
             </div>
           </div>
         </div>
       )}
       
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-6">
         {statCards.map((stat, idx) => (
           <div key={idx} className="bg-white rounded-xl shadow-sm p-6 flex flex-col items-center justify-center text-center transition hover:shadow-md">
             <div className={`p-3 rounded-full text-white mb-4 ${stat.color}`}>
@@ -106,8 +107,8 @@ const Dashboard = () => {
         ))}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8">
-        <div className="bg-white p-6 rounded-xl shadow-sm">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mt-6 sm:mt-8">
+        <div className="bg-white p-4 sm:p-6 rounded-xl shadow-sm overflow-hidden">
           <h3 className="text-lg font-bold text-gray-800 mb-4">Orders by Hour (Simulated)</h3>
           <div className="h-64">
              <ResponsiveContainer width="100%" height="100%">
@@ -129,7 +130,7 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <div className="bg-white p-6 rounded-xl shadow-sm">
+        <div className="bg-white p-4 sm:p-6 rounded-xl shadow-sm">
           <h3 className="text-lg font-bold text-gray-800 mb-4">Peak Shopping Hours Insight</h3>
           <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r flex flex-col gap-2">
             <p className="text-blue-800">

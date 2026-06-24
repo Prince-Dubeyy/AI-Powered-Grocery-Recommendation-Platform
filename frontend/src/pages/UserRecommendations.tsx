@@ -25,15 +25,15 @@ const UserRecommendations = () => {
   };
 
   return (
-    <div className="max-w-5xl mx-auto space-y-8">
+    <div className="max-w-5xl mx-auto space-y-6 sm:space-y-8">
       <div>
-        <h1 className="text-3xl font-bold text-gray-800">👤 Personalized Recommendations</h1>
-        <p className="text-gray-600 mt-2">Collaborative Filtering concepts based on a user's past purchase history.</p>
+        <h1 className="text-2xl sm:text-3xl font-bold text-gray-800">👤 Personalized Recommendations</h1>
+        <p className="text-sm sm:text-base text-gray-600 mt-2">Collaborative Filtering concepts based on a user's past purchase history.</p>
       </div>
 
-      <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+      <div className="bg-white p-4 sm:p-6 rounded-xl shadow-sm border border-gray-100">
         <form onSubmit={handleSearch} className="flex flex-col gap-4">
-          <div className="flex gap-4">
+          <div className="flex flex-col sm:flex-row gap-4">
             <div className="relative flex-1">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <User className="h-5 w-5 text-gray-400" />
@@ -50,14 +50,14 @@ const UserRecommendations = () => {
             <button
               type="submit"
               disabled={loading}
-              className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition-colors flex items-center gap-2"
+              className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition-colors flex items-center justify-center gap-2 w-full sm:w-auto min-h-[44px]"
             >
               {loading ? <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div> : 'Get Personalized Picks'}
             </button>
           </div>
-          <div className="flex items-center gap-3 text-sm text-gray-600">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 text-sm text-gray-600">
             <span>Try these sample users:</span>
-            <div className="flex gap-2">
+            <div className="flex flex-wrap gap-2">
               {sampleUsers.map(id => (
                 <button
                   key={id}
@@ -81,8 +81,8 @@ const UserRecommendations = () => {
 
       {recommendations.length > 0 && !error && (
         <div className="space-y-4">
-          <h2 className="text-xl font-semibold text-gray-800">Top Picks for User {userId}:</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          <h2 className="text-lg sm:text-xl font-semibold text-gray-800">Top Picks for User {userId}:</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-4">
             {recommendations.map((rec, idx) => (
               <div key={idx} className="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex flex-col items-center justify-center text-center gap-3 transition-transform hover:-translate-y-1 hover:shadow-md">
                 <div className="bg-blue-50 text-blue-600 p-3 rounded-full">
