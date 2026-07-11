@@ -5,7 +5,7 @@ seaborn
 streamlit
 scikit-learn
 mlxtend
-google-generativeai
+groq
 python-dotenv
 fastparquet
 jupyter

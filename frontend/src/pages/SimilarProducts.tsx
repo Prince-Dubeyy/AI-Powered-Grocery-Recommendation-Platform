@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import api from '../api';
-import { Search, Tag } from 'lucide-react';
+import { Search, Tag, Sparkles } from 'lucide-react';
 
 const SimilarProducts = () => {
   const [productName, setProductName] = useState('Organic Hass Avocado');
@@ -23,21 +23,29 @@ const SimilarProducts = () => {
   };
 
   return (
-    <div className="max-w-5xl mx-auto space-y-6 sm:space-y-8">
-      <div>
-        <h1 className="text-2xl sm:text-3xl font-bold text-gray-800">🔍 Find Similar Products</h1>
-        <p className="text-sm sm:text-base text-gray-600 mt-2">Item-Based Similarity mapping products by department and aisle.</p>
+    <div className="max-w-6xl mx-auto space-y-8 animate-fade-in pb-12">
+      <div className="bg-gradient-to-r from-pink-500 to-rose-600 rounded-3xl p-8 sm:p-10 text-white shadow-xl relative overflow-hidden">
+        <div className="relative z-10">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 backdrop-blur-md mb-4 text-xs font-medium border border-white/20">
+            <Sparkles size={14} /> Step 3
+          </div>
+          <h1 className="text-3xl sm:text-4xl font-extrabold mb-3">Find Similar Products</h1>
+          <p className="text-pink-100 max-w-2xl text-base sm:text-lg">
+            Discover alternative and related items using Item-Based Similarity mappings across departments and aisles.
+          </p>
+        </div>
+        <div className="absolute top-0 right-0 -mr-10 -mt-10 w-64 h-64 rounded-full bg-white opacity-5 blur-2xl"></div>
       </div>
 
-      <div className="bg-white p-4 sm:p-6 rounded-xl shadow-sm border border-gray-100">
+      <div className="glass p-6 sm:p-8 rounded-2xl shadow-lg border border-white/50 relative z-10">
         <form onSubmit={handleSearch} className="flex flex-col sm:flex-row gap-4">
           <div className="relative flex-1">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
               <Search className="h-5 w-5 text-gray-400" />
             </div>
             <input
               type="text"
-              className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-orange-500 focus:border-orange-500 text-gray-900"
+              className="block w-full pl-12 pr-4 py-4 bg-white/50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-pink-500 text-gray-900 transition-all shadow-inner"
               placeholder="Enter a product name..."
               value={productName}
               onChange={(e) => setProductName(e.target.value)}
@@ -46,29 +54,35 @@ const SimilarProducts = () => {
           <button
             type="submit"
             disabled={loading}
-            className="bg-orange-600 hover:bg-orange-700 text-white font-medium py-3 px-6 rounded-lg transition-colors flex items-center justify-center gap-2 w-full sm:w-auto min-h-[44px]"
+            className="bg-pink-600 hover:bg-pink-700 text-white font-semibold py-4 px-8 rounded-xl transition-all flex items-center justify-center gap-2 w-full sm:w-auto hover-lift disabled:opacity-70 disabled:hover-lift-none shadow-md"
           >
-            {loading ? <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div> : 'Find Similar Products'}
+            {loading ? <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div> : 'Find Similar Items'}
           </button>
         </form>
       </div>
 
       {error && (
-        <div className="bg-red-50 border-l-4 border-red-500 p-4 rounded text-red-700">
-          <p>{error}</p>
+        <div className="bg-red-50/80 backdrop-blur-sm border border-red-200 text-red-700 p-4 rounded-xl flex items-center gap-3 animate-slide-up">
+          <div className="bg-red-100 p-2 rounded-full"><span className="text-xl">⚠️</span></div>
+          <p className="font-medium">{error}</p>
         </div>
       )}
 
       {recommendations.length > 0 && !error && (
-        <div className="space-y-4">
-          <h2 className="text-lg sm:text-xl font-semibold text-gray-800">Similar to "{productName}":</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+        <div className="space-y-6 animate-slide-up">
+          <div className="flex items-center gap-3">
+            <div className="h-8 w-2 bg-pink-500 rounded-full"></div>
+            <h2 className="text-2xl font-bold text-gray-800">Similar to "{productName}"</h2>
+          </div>
+          
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
             {recommendations.map((rec, idx) => (
-              <div key={idx} className="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex flex-col items-center justify-center text-center gap-3 transition-transform hover:-translate-y-1 hover:shadow-md">
-                <div className="bg-orange-50 text-orange-600 p-3 rounded-full">
-                  <Tag size={24} />
+              <div key={idx} className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center justify-center text-center gap-4 hover-lift group relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-pink-50/50 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div className="bg-pink-50 text-pink-600 p-4 rounded-2xl group-hover:bg-pink-100 transition-colors relative z-10 shadow-inner">
+                  <Tag size={28} />
                 </div>
-                <h3 className="font-medium text-gray-800">{rec}</h3>
+                <h3 className="font-medium text-gray-800 relative z-10 leading-snug">{rec}</h3>
               </div>
             ))}
           </div>

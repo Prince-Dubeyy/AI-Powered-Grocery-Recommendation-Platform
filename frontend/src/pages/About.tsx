@@ -40,7 +40,7 @@ const About = () => {
             <ul className="list-disc pl-5 text-gray-600 space-y-2">
               <li><strong>Apriori Algorithm:</strong> Mined frequent itemsets for Association Rules.</li>
               <li><strong>Collaborative Filtering:</strong> User-based and Item-based logic.</li>
-              <li><strong>Generative AI:</strong> Integrated Google Gemini 1.5 Flash for Explainable AI.</li>
+              <li><strong>Generative AI:</strong> Integrated Groq API (Llama 3) for Explainable AI.</li>
             </ul>
           </div>
 

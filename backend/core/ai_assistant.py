@@ -1,28 +1,28 @@
 import os
 from dotenv import load_dotenv
 import logging
-from google import genai
+from groq import Groq
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
 # Load environment variables
 load_dotenv()
-api_key = os.getenv("GEMINI_API_KEY")
+api_key = os.getenv("GROQ_API_KEY")
 
 client = None
 if not api_key or api_key == "your_api_key_here":
-    logger.warning("GEMINI_API_KEY is not set.")
+    logger.warning("GROQ_API_KEY is not set.")
 else:
-    client = genai.Client(api_key=api_key)
+    client = Groq(api_key=api_key)
 
 def explain_recommendation(target_product, recommended_products):
     """
-    Uses Gemini to generate a human-readable explanation of why these products
+    Uses Groq to generate a human-readable explanation of why these products
     are recommended together based on common shopping patterns.
     """
     if not client:
-        return "⚠️ Gemini API key is missing. Please add GEMINI_API_KEY to your .env file."
+        return "⚠️ Groq API key is missing. Please add GROQ_API_KEY to your .env file."
         
     if not recommended_products or (len(recommended_products) == 1 and recommended_products[0].startswith("No")):
         return "No specific recommendations to explain."
@@ -40,11 +40,16 @@ def explain_recommendation(target_product, recommended_products):
     """
     
     try:
-        response = client.models.generate_content(
-            model='gemini-2.0-flash',
-            contents="You are a helpful grocery shopping assistant.\n" + prompt
+        response = client.chat.completions.create(
+            model="llama3-8b-8192",
+            messages=[
+                {"role": "system", "content": "You are a helpful grocery shopping assistant."},
+                {"role": "user", "content": prompt}
+            ],
+            temperature=0.7,
+            max_tokens=150,
         )
-        return response.text.strip()
+        return response.choices[0].message.content.strip()
     except Exception as e:
         logger.error(f"Error generating AI explanation: {e}")
         return f"AI Explanation currently unavailable ({str(e)})."
@@ -54,7 +59,7 @@ def generate_grocery_basket(basket_type):
     Generates a specialized grocery basket (e.g., Healthy, Budget, Vegetarian).
     """
     if not client:
-        return "⚠️ Gemini API key is missing. Please add GEMINI_API_KEY to your .env file."
+        return "⚠️ Groq API key is missing. Please add GROQ_API_KEY to your .env file."
         
     prompt = f"""
     Act as an expert nutritionist and personal grocery shopper.
@@ -65,11 +70,16 @@ def generate_grocery_basket(basket_type):
     """
     
     try:
-        response = client.models.generate_content(
-            model='gemini-2.0-flash',
-            contents="You are a helpful grocery shopping assistant.\n" + prompt
+        response = client.chat.completions.create(
+            model="llama3-8b-8192",
+            messages=[
+                {"role": "system", "content": "You are a helpful grocery shopping assistant."},
+                {"role": "user", "content": prompt}
+            ],
+            temperature=0.7,
+            max_tokens=300,
         )
-        return response.text.strip()
+        return response.choices[0].message.content.strip()
     except Exception as e:
         logger.error(f"Error generating AI basket: {e}")
         return f"AI Assistant currently unavailable ({str(e)})."

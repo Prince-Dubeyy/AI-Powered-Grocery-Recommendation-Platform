@@ -1,6 +1,6 @@
 # 🛒 AI-Powered Grocery Recommendation Platform
 
-An end-to-end AI-powered grocery recommendation system built using **FastAPI**, **React**, **TypeScript**, **Machine Learning**, **Association Rule Mining**, **Collaborative Filtering**, and **Google Gemini AI**.
+An end-to-end AI-powered grocery recommendation system built using **FastAPI**, **React**, **TypeScript**, **Machine Learning**, **Association Rule Mining**, **Collaborative Filtering**, and **Groq AI**.
 
 The platform analyzes real grocery purchase patterns from the Instacart dataset and generates intelligent product recommendations, personalized suggestions, product similarity insights, and AI-generated explanations.
 
@@ -50,7 +50,7 @@ Finds products with similar purchase patterns using recommendation models.
 
 ### 🤖 AI Recommendation Explainer
 
-Powered by Google Gemini AI.
+Powered by Groq AI (Llama 3).
 
 Explains:
 
@@ -135,7 +135,7 @@ ML Recommendation Engine
 ⬇
 Instacart Dataset + Trained Models
 ⬇
-Gemini AI Integration
+Groq AI Integration
 
 ---
 
@@ -160,7 +160,7 @@ Gemini AI Integration
 
 ## AI
 
-* Google Gemini API
+* Groq API
 
 ## Machine Learning
 
@@ -200,7 +200,7 @@ Discovers related grocery items.
 
 ### AI Explainer
 
-Explains recommendation logic using Gemini.
+Explains recommendation logic using Groq (Llama 3).
 
 ### AI Assistant
 

@@ -1,144 +1,104 @@
-import { useEffect, useState } from 'react';
-import api from '../api';
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
-import { ShoppingBag, Users, Package, RefreshCw, BarChart3, Database } from 'lucide-react';
-
-interface DashboardData {
-  total_orders: number;
-  total_customers: number;
-  total_products: number;
-  reorder_rate: number;
-  avg_basket_size: number;
-}
-
-interface DatasetInfo {
-  users: number;
-  products: number;
-  orders: number;
-  interactions: number;
-}
+import { ArrowRight, ShoppingCart, Users, Search, BrainCircuit, Sparkles } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Dashboard = () => {
-  const [data, setData] = useState<DashboardData | null>(null);
-  const [datasetInfo, setDatasetInfo] = useState<DatasetInfo | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [analyticsRes, infoRes] = await Promise.all([
-          api.get('/analytics'),
-          api.get('/dataset-info')
-        ]);
-        setData(analyticsRes.data);
-        setDatasetInfo(infoRes.data);
-      } catch (err: any) {
-        setError(err.message || 'Failed to fetch analytics data');
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchData();
-  }, []);
-
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center h-full">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600"></div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return <div className="text-red-500 bg-red-50 p-4 rounded-lg">{error}</div>;
-  }
-
-  const statCards = [
-    { title: 'Total Orders', value: (data?.total_orders ?? 0).toLocaleString(), icon: <ShoppingBag />, color: 'bg-blue-500' },
-    { title: 'Total Customers', value: (data?.total_customers ?? 0).toLocaleString(), icon: <Users />, color: 'bg-green-500' },
-    { title: 'Total Products', value: (data?.total_products ?? 0).toLocaleString(), icon: <Package />, color: 'bg-purple-500' },
-    { title: 'Reorder Rate', value: `${((data?.reorder_rate ?? 0) * 100).toFixed(1)}%`, icon: <RefreshCw />, color: 'bg-yellow-500' },
-    { title: 'Avg Basket Size', value: (data?.avg_basket_size ?? 0).toFixed(1), icon: <BarChart3 />, color: 'bg-pink-500' },
+  const journeySteps = [
+    {
+      title: 'Upload or Select Data',
+      description: 'Start by exploring the vast Instacart dataset with over 3 million grocery orders.',
+      icon: <ShoppingCart size={24} />,
+      link: '/product-recs',
+      color: 'bg-blue-500',
+    },
+    {
+      title: 'Run Analysis',
+      description: 'The engine processes purchasing patterns using collaborative filtering.',
+      icon: <Users size={24} />,
+      link: '/user-recs',
+      color: 'bg-purple-500',
+    },
+    {
+      title: 'Generate Associations',
+      description: 'The Apriori algorithm discovers hidden rules (e.g., Bread -> Butter).',
+      icon: <Search size={24} />,
+      link: '/similar',
+      color: 'bg-pink-500',
+    },
+    {
+      title: 'View Recommendations',
+      description: 'See personalized and cross-selling product suggestions tailored for users.',
+      icon: <Sparkles size={24} />,
+      link: '/product-recs',
+      color: 'bg-yellow-500',
+    },
+    {
+      title: 'Get AI Explanation',
+      description: 'Groq AI explains the reasoning behind every recommendation in plain English.',
+      icon: <BrainCircuit size={24} />,
+      link: '/ai-explain',
+      color: 'bg-green-500',
+    }
   ];
 
   return (
-    <div className="max-w-7xl mx-auto space-y-4 sm:space-y-6">
-      <h1 className="text-2xl sm:text-3xl font-bold text-gray-800">Business Analytics Dashboard</h1>
-      <p className="text-sm sm:text-base text-gray-600">High-level KPIs derived from millions of Instacart orders.</p>
-
-      {/* Proof of Dataset Scale Section */}
-      {datasetInfo && !('error' in datasetInfo) && (
-        <div className="bg-gradient-to-r from-blue-900 to-indigo-900 text-white p-4 sm:p-6 rounded-xl shadow-lg border border-indigo-800 flex flex-col md:flex-row gap-4 sm:gap-6 items-center justify-between">
-          <div className="flex items-center gap-4">
-            <div className="bg-indigo-800 p-4 rounded-full">
-              <Database size={32} className="text-blue-300" />
-            </div>
-            <div>
-              <h2 className="text-xl font-bold">Production Engine: Full Dataset Active</h2>
-              <p className="text-blue-200 text-sm mt-1">
-                The recommendation engine is successfully trained on the massive, completely un-sampled Instacart dataset. Memory overhead is bypassed via precomputed O(1) lookup matrices.
-              </p>
-            </div>
+    <div className="max-w-7xl mx-auto space-y-12 pb-12 animate-fade-in">
+      {/* Hero Section */}
+      <div className="relative rounded-3xl overflow-hidden bg-gradient-primary text-white p-8 sm:p-12 lg:p-16 shadow-2xl glass-dark">
+        <div className="relative z-10 max-w-3xl">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 backdrop-blur-md mb-6 border border-white/30 text-sm font-medium">
+            <Sparkles size={16} /> Portfolio Project
           </div>
-          <div className="flex flex-col sm:flex-row gap-4 sm:gap-8 text-center bg-indigo-950 p-4 rounded-lg border border-indigo-800 w-full md:w-auto">
-            <div className="flex-1">
-              <p className="text-xs text-blue-300 font-medium uppercase tracking-wider">Model Interactions</p>
-              <p className="text-xl sm:text-2xl font-bold text-green-400 mt-1">{(datasetInfo?.interactions ?? 0).toLocaleString()}</p>
-            </div>
-            <div className="flex-1">
-              <p className="text-xs text-blue-300 font-medium uppercase tracking-wider">Model Users</p>
-              <p className="text-xl sm:text-2xl font-bold text-white mt-1">{(datasetInfo?.users ?? 0).toLocaleString()}</p>
-            </div>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6">
+            AI-Powered Grocery <br /> Recommendation Platform
+          </h1>
+          <p className="text-lg sm:text-xl text-green-50 max-w-2xl mb-8 leading-relaxed">
+            Recommendation System using Market Basket Analysis, Apriori Algorithm, Collaborative Filtering, and AI-powered explanations.
+          </p>
+          
+          <div className="flex flex-wrap gap-3">
+            {['Data Science', 'Machine Learning', 'Recommendation Systems', 'Business Analytics', 'AI Integration'].map((skill) => (
+              <span key={skill} className="px-4 py-1.5 rounded-lg bg-black/20 backdrop-blur-sm border border-white/10 text-sm font-medium">
+                {skill}
+              </span>
+            ))}
           </div>
         </div>
-      )}
-      
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-6">
-        {statCards.map((stat, idx) => (
-          <div key={idx} className="bg-white rounded-xl shadow-sm p-6 flex flex-col items-center justify-center text-center transition hover:shadow-md">
-            <div className={`p-3 rounded-full text-white mb-4 ${stat.color}`}>
-              {stat.icon}
-            </div>
-            <h3 className="text-gray-500 text-sm font-medium">{stat.title}</h3>
-            <p className="text-2xl font-bold text-gray-800 mt-1">{stat.value}</p>
-          </div>
-        ))}
+        
+        {/* Abstract Background Shapes */}
+        <div className="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 rounded-full bg-white opacity-5 blur-3xl"></div>
+        <div className="absolute bottom-0 right-20 w-72 h-72 rounded-full bg-green-300 opacity-10 blur-2xl"></div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mt-6 sm:mt-8">
-        <div className="bg-white p-4 sm:p-6 rounded-xl shadow-sm overflow-hidden">
-          <h3 className="text-lg font-bold text-gray-800 mb-4">Orders by Hour (Simulated)</h3>
-          <div className="h-64">
-             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={[
-                { hour: '8 AM', orders: 4000 },
-                { hour: '10 AM', orders: 8500 },
-                { hour: '12 PM', orders: 11000 },
-                { hour: '2 PM', orders: 14000 },
-                { hour: '4 PM', orders: 12000 },
-                { hour: '6 PM', orders: 7000 },
-              ]}>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                <XAxis dataKey="hour" axisLine={false} tickLine={false} />
-                <YAxis axisLine={false} tickLine={false} />
-                <Tooltip cursor={{fill: 'transparent'}} />
-                <Bar dataKey="orders" fill="#3b82f6" radius={[4, 4, 0, 0]} />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
+      {/* User Journey Section */}
+      <div className="space-y-8 animate-slide-up" style={{ animationDelay: '0.2s' }}>
+        <div className="text-center max-w-2xl mx-auto mb-12">
+          <h2 className="text-3xl font-bold text-gray-900 mb-4">How It Works</h2>
+          <p className="text-gray-600 text-lg">Follow the journey from raw data to intelligent, AI-explained grocery recommendations.</p>
         </div>
 
-        <div className="bg-white p-4 sm:p-6 rounded-xl shadow-sm">
-          <h3 className="text-lg font-bold text-gray-800 mb-4">Peak Shopping Hours Insight</h3>
-          <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r flex flex-col gap-2">
-            <p className="text-blue-800">
-              <strong>Midday Peaks:</strong> Shopping volume hits its highest points between 10 AM and 3 PM.
-            </p>
-            <p className="text-blue-800">
-              <strong>Recommendation:</strong> Schedule push notifications for personalized recommendations around 9 AM to influence midday cart additions.
-            </p>
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
+          {journeySteps.map((step, idx) => (
+            <div key={idx} className="relative group">
+              {idx !== journeySteps.length - 1 && (
+                <div className="hidden lg:block absolute top-12 left-1/2 w-full h-[2px] bg-gray-200 z-0">
+                  <div className="h-full bg-green-500 w-0 group-hover:w-full transition-all duration-500 ease-out"></div>
+                </div>
+              )}
+              
+              <Link to={step.link} className="relative z-10 flex flex-col items-center text-center p-6 bg-white rounded-2xl shadow-sm border border-gray-100 hover-lift h-full glass transition-all duration-300 group-hover:border-green-200">
+                <div className={`w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg ${step.color} transform group-hover:scale-110 transition-transform duration-300`}>
+                  {step.icon}
+                </div>
+                <div className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Step {idx + 1}</div>
+                <h3 className="text-lg font-bold text-gray-900 mb-3">{step.title}</h3>
+                <p className="text-sm text-gray-600 mb-6 flex-grow">{step.description}</p>
+                
+                <div className="mt-auto flex items-center justify-center gap-2 text-green-600 font-medium text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  Try it <ArrowRight size={16} />
+                </div>
+              </Link>
+            </div>
+          ))}
         </div>
       </div>
     </div>

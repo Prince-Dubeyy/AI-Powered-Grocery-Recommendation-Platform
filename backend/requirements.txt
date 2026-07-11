@@ -5,6 +5,6 @@ pandas
 numpy
 scikit-learn
 mlxtend
-google-genai
+groq
 python-dotenv
 fastparquet

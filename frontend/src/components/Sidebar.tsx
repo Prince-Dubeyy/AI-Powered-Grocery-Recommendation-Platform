@@ -23,6 +23,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
     { name: 'Similar Products', path: '/similar', icon: <Search size={20} /> },
     { name: 'AI Explainer', path: '/ai-explain', icon: <BrainCircuit size={20} /> },
     { name: 'AI Assistant', path: '/ai-assistant', icon: <Bot size={20} /> },
+    { name: 'How It Works', path: '/how-it-works', icon: <BrainCircuit size={20} /> },
     { name: 'About', path: '/about', icon: <Info size={20} /> },
   ];
 

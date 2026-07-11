@@ -15,7 +15,7 @@ You must configure the following Environment Variables in your Railway Variables
 
 | Key | Value | Description |
 |-----|-------|-------------|
-| `GEMINI_API_KEY` | `your_google_ai_studio_key` | Required for the AI Explainer and Assistant features. |
+| `GROQ_API_KEY` | `your_groq_api_key` | Required for the AI Explainer and Assistant features. |
 | `ALLOWED_ORIGINS` | `https://your-vercel-app.vercel.app` | Required for CORS. Replace with your actual Vercel frontend URL. Multiple URLs can be separated by commas. |
 
 *(Note: Railway automatically provides a `$PORT` variable which `main.py` is configured to use dynamically).*

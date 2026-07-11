@@ -9,6 +9,7 @@ import SimilarProducts from './pages/SimilarProducts';
 import AIExplainer from './pages/AIExplainer';
 import AIAssistant from './pages/AIAssistant';
 import About from './pages/About';
+import HowItWorks from './pages/HowItWorks';
 function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -40,6 +41,7 @@ function App() {
               <Route path="/similar" element={<SimilarProducts />} />
               <Route path="/ai-explain" element={<AIExplainer />} />
               <Route path="/ai-assistant" element={<AIAssistant />} />
+              <Route path="/how-it-works" element={<HowItWorks />} />
               <Route path="/about" element={<About />} />
             </Routes>
           </div>

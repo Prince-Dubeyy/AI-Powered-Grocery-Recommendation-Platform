@@ -9,7 +9,7 @@ This guide covers the deployment of the FastAPI backend to Railway.
 
 ## Environment Variables
 Ensure the following variables are securely added to the Railway variables panel:
-- `GEMINI_API_KEY`: Your Google AI Studio API key.
+- `GROQ_API_KEY`: Your Groq API key.
 - `ALLOWED_ORIGINS`: `https://cartmind-ai.vercel.app` (Your frontend URL, required for CORS).
 
 ## Startup Command
