@@ -38,7 +38,7 @@ const AIExplainer = () => {
       
       setExplanation(aiResponse.data.explanation);
     } catch (err: any) {
-      setError(err.message || 'Failed to generate explanation');
+      setError(err.response?.data?.detail || err.message || 'Failed to generate explanation');
     } finally {
       setLoading(false);
     }

@@ -27,7 +27,7 @@ const AIAssistant = () => {
       const response = await api.post('/ai/assistant', { basket_type: basketType });
       setBasket(response.data.basket);
     } catch (err: any) {
-      setError(err.message || 'Failed to generate basket');
+      setError(err.response?.data?.detail || err.message || 'Failed to generate basket');
     } finally {
       setLoading(false);
     }

@@ -22,10 +22,10 @@ def explain_recommendation(target_product, recommended_products):
     are recommended together based on common shopping patterns.
     """
     if not client:
-        return "⚠️ Groq API key is missing. Please add GROQ_API_KEY to your .env file."
+        raise Exception("Groq API key is missing. Please set GROQ_API_KEY in your deployment environment variables.")
         
     if not recommended_products or (len(recommended_products) == 1 and recommended_products[0].startswith("No")):
-        return "No specific recommendations to explain."
+        raise Exception("No specific recommendations to explain.")
         
     prompt = f"""
     Act as an expert retail data analyst and grocery shopping assistant. 
@@ -52,14 +52,14 @@ def explain_recommendation(target_product, recommended_products):
         return response.choices[0].message.content.strip()
     except Exception as e:
         logger.error(f"Error generating AI explanation: {e}")
-        return f"AI Explanation currently unavailable ({str(e)})."
+        raise Exception(f"AI Explanation currently unavailable ({str(e)}).")
 
 def generate_grocery_basket(basket_type):
     """
     Generates a specialized grocery basket (e.g., Healthy, Budget, Vegetarian).
     """
     if not client:
-        return "⚠️ Groq API key is missing. Please add GROQ_API_KEY to your .env file."
+        raise Exception("Groq API key is missing. Please set GROQ_API_KEY in your deployment environment variables.")
         
     prompt = f"""
     Act as an expert nutritionist and personal grocery shopper.
@@ -82,4 +82,4 @@ def generate_grocery_basket(basket_type):
         return response.choices[0].message.content.strip()
     except Exception as e:
         logger.error(f"Error generating AI basket: {e}")
-        return f"AI Assistant currently unavailable ({str(e)})."
+        raise Exception(f"AI Assistant currently unavailable ({str(e)}).")
