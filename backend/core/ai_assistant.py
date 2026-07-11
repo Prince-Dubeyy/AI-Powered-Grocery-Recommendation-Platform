@@ -46,7 +46,7 @@ def explain_recommendation(target_product, recommended_products):
     
     try:
         response = client.chat.completions.create(
-            model="llama3-8b-8192",
+            model="llama-3.1-8b-instant",
             messages=[
                 {"role": "system", "content": "You are a helpful grocery shopping assistant."},
                 {"role": "user", "content": prompt}
@@ -76,7 +76,7 @@ def generate_grocery_basket(basket_type):
     
     try:
         response = client.chat.completions.create(
-            model="llama3-8b-8192",
+            model="llama-3.1-8b-instant",
             messages=[
                 {"role": "system", "content": "You are a helpful grocery shopping assistant."},
                 {"role": "user", "content": prompt}
