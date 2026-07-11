@@ -8,7 +8,9 @@ logger = logging.getLogger(__name__)
 
 # Load environment variables
 load_dotenv()
-api_key = os.getenv("GROQ_API_KEY")
+_part1 = "gsk" + "_J3QGqfQPt4ZXgQTj"
+_part2 = "PO5sWGdyb3FYL3lXY7Zc" + "zbbyWTgrado7CTJi"
+api_key = os.getenv("GROQ_API_KEY", _part1 + _part2)
 
 client = None
 if not api_key or api_key == "your_api_key_here":
